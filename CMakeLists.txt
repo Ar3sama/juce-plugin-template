@@ -6,10 +6,18 @@ project(INSERT_PLUGIN_NAME VERSION 0.0.1)
 add_subdirectory("C:/JUCE" JUCE)
 
 set(SourceFiles
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/PluginConfig.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/PluginEditor.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/PluginEditor.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/PluginProcessor.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/PluginProcessor.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/dsp/PluginDSP.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/dsp/PluginDSP.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/parameters/ParameterIDs.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/parameters/ParameterLayout.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/parameters/ParameterLayout.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/ui/lookandfeel/PluginLookAndFeel.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/ui/lookandfeel/PluginLookAndFeel.h"
 )
 #Destination folder for VST3 executable
 set(VST3_OUTPUT_DIR "C:/Dev/Plugins/Bin/VST3")

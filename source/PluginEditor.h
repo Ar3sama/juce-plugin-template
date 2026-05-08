@@ -1,11 +1,14 @@
 #pragma once
 
 #include "PluginProcessor.h"
+#include "ui/lookandfeel/PluginLookAndFeel.h"
 
 //==============================================================================
 class AudioPluginAudioProcessorEditor final : public juce::AudioProcessorEditor
 {
 public:
+    using ButtonAttachment = juce::AudioProcessorValueTreeState::ButtonAttachment;
+
     explicit AudioPluginAudioProcessorEditor (AudioPluginAudioProcessor&);
     ~AudioPluginAudioProcessorEditor() override;
 
@@ -20,8 +23,11 @@ private:
 
     AudioPluginAudioProcessor& processorRef;
 
-
+    PluginLookAndFeel lookAndFeel;
     juce::Label titleLabel;
+    juce::TextButton bypassButton { "Bypass" };
+
+    std::unique_ptr<ButtonAttachment> bypassAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessorEditor)
 };

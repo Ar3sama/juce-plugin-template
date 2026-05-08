@@ -1,38 +1,45 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#include "PluginConfig.h"
+#include "parameters/ParameterIDs.h"
+
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (AudioPluginAudioProcessor& p)
     : AudioProcessorEditor (&p), processorRef (p)
 {
-    //title 
+    setLookAndFeel (&lookAndFeel);
+
     titleLabel.setText ("Base Plugin Template", juce::dontSendNotification);
     titleLabel.setJustificationType (juce::Justification::centred);
+    titleLabel.setFont (juce::FontOptions { 20.0f, juce::Font::bold });
     addAndMakeVisible (titleLabel);
 
+    bypassButton.setClickingTogglesState (true);
+    addAndMakeVisible (bypassButton);
 
+    bypassAttachment = std::make_unique<ButtonAttachment> (
+        processorRef.parameters, ParameterIDs::bypass, bypassButton);
 
-    //window size
-    setSize (400, 300);
+    setSize (PluginConfig::defaultEditorWidth, PluginConfig::defaultEditorHeight);
 }
+
 
 AudioPluginAudioProcessorEditor::~AudioPluginAudioProcessorEditor()
 {
+    setLookAndFeel (nullptr);
 }
 
 //==============================================================================
 void AudioPluginAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (juce::Colour::fromFloatRGBA(0.0f, 0.0f, 0.0f, 0.75f));
+    g.fillAll (findColour (juce::ResizableWindow::backgroundColourId));
 }
 
 void AudioPluginAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
-
-    auto area = getLocalBounds().reduced (20);
+    auto area = getLocalBounds().reduced (PluginConfig::editorMargin);
 
     titleLabel.setBounds (area.removeFromTop (40));
+    bypassButton.setBounds (area.removeFromBottom (26).withSizeKeepingCentre (76, 24));
 }
