@@ -13,7 +13,8 @@ Parametres :
 
 Contraintes :
 - respecte strictement AGENTS.md
-- garde le DSP dans source/dsp/
+- garde le DSP dans source/dsp/ (cree de nouveaux fichiers source si necessair)
+- conserver un style lisible pedagogique et bien commenter pour les algorithmes de DSP
 - déclare les paramètres dans source/parameters/
 - utilise APVTS pour tous les paramètres
 - connecte l’UI avec des attachments JUCE

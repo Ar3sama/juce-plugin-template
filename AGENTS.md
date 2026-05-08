@@ -75,8 +75,15 @@ Dans `processBlock()` :
 - eviter les logs
 - ne pas creer de buffers temporaires a chaque bloc
 
-Preparer les ressources dans `prepareToPlay()` ou `PluginDSP::prepare()`.
-Reinitialiser l'etat dans `releaseResources()` ou `PluginDSP::reset()`.
+Dans `PluginDSP::prepare()`:
+
+- Préparer TOUTES les ressources
+- Calculer les coefficients dépendant du sample rate (filtres, delays, etc.)
+- Allouer et initialiser les buffers nécessaires (états de filtres, mémoires, etc.)
+
+Dans `PluginDSP::reset()` :
+
+- Réinitialiser l'état
 
 ## CMake
 

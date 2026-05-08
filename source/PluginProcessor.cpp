@@ -90,6 +90,7 @@ void AudioPluginAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void AudioPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    //TODO : Prepare the ressources in the DSP file 
     dsp.prepare (sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
